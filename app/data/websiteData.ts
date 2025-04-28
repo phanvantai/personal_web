@@ -1,5 +1,4 @@
-// Personal Website Data
-const websiteData = {
+export const websiteData = {
     // Basic Information
     basics: {
         name: "Tai Phan Van",
@@ -12,7 +11,7 @@ const websiteData = {
         // Typing animation text
         typingText: ["Mobile Engineer", "iOS Engineer", "Flutter Developer", "Freelancer"]
     },
-    
+
     // About Section
     about: {
         headline: "Who am I?",
@@ -22,7 +21,7 @@ const websiteData = {
         ],
         // Profile image is expected at images/profile.jpg
     },
-    
+
     // Skills Section
     skills: {
         technical: [
@@ -30,18 +29,19 @@ const websiteData = {
             { name: "Flutter/Dart", level: 90 },
             { name: "React Native", level: 75 },
             { name: "Firebase", level: 85 },
-            { name: "RESTful APIs", level: 88 },
+            { name: "RESTful APIs", level: 92 },
+            { name: "GraphQL", level: 80 },
             { name: "Git/Version Control", level: 90 }
         ],
         professional: [
-            { name: "UI/UX Implementation", level: 92 },
+            { name: "UI/UX Implementation", level: 88 },
             { name: "Problem Solving", level: 90 },
             { name: "Team Collaboration", level: 88 },
             { name: "Agile/Scrum", level: 85 },
             { name: "Code Review", level: 88 }
         ]
     },
-    
+
     // Portfolio Section
     portfolio: {
         categories: ["all", "ios", "flutter", "other"],
@@ -96,15 +96,15 @@ const websiteData = {
             }
         ]
     },
-    
+
     // Social Media
     social: [
         { platform: "linkedin", icon: "fab fa-linkedin", url: "https://www.linkedin.com/in/taiphanvan/" },
-        { platform: "github", icon: "fab fa-github", url: "https://github.com/taiphan" },
-        { platform: "twitter", icon: "fab fa-twitter", url: "https://twitter.com/taiphanvan" },
+        { platform: "github", icon: "fab fa-github", url: "https://github.com/phanvantai" },
+        // { platform: "twitter", icon: "fab fa-twitter", url: "https://twitter.com/taiphanvan" },
         { platform: "email", icon: "fas fa-envelope", url: "mailto:taipv.swe@gmail.com" }
     ],
-    
+
     // Navigation Menu
     navigation: [
         { name: "Home", link: "#home" },
@@ -113,7 +113,7 @@ const websiteData = {
         { name: "Portfolio", link: "#portfolio" },
         { name: "Contact", link: "#contact" }
     ],
-    
+
     // Copyright info
     copyright: "2025 Tai Phan Van. All Rights Reserved."
 };
