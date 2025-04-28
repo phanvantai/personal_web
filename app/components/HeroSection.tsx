@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { websiteData } from '../data/websiteData'
 
 export default function HeroSection() {
@@ -49,8 +49,8 @@ export default function HeroSection() {
         <section id="home" className="hero">
             <div className="container">
                 <div className="hero-content">
-                    <h1>Hello, I'm <span className="highlight">{websiteData.basics.name}</span></h1>
-                    <h2>I'm a <span className="typed-text">{typedText}</span><span className="cursor">&nbsp;</span></h2>
+                    <h1>Hello, I&apos;m <span className="highlight">{websiteData.basics.name}</span></h1>
+                    <h2>I&apos;m a <span className="typed-text">{typedText}</span><span className="cursor">&nbsp;</span></h2>
                     <p>{websiteData.basics.description}</p>
                     <div className="hero-buttons">
                         <a href="#contact" className="btn btn-primary">Contact Me</a>
