@@ -1,11 +1,19 @@
 "use client"
 
 import { useState, useEffect } from 'react'
+import Image from 'next/image'
 import { websiteData } from '../data/websiteData'
+import ThemeToggle from './ThemeToggle'
+import ColorPicker from './ColorPicker'
+import LanguageSwitcher from './LanguageSwitcher'
+import { useLanguage } from '../contexts/LanguageContext'
+import { translations } from '../data/translations'
 
 export default function Navbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
     const [activeSection, setActiveSection] = useState('home')
+    const { language } = useLanguage();
+    const t = translations[language];
 
     useEffect(() => {
         const handleScroll = () => {
@@ -43,11 +51,36 @@ export default function Navbar() {
         }
     }
 
+    // Map navigation items to their translations
+    const navItems = [
+        { name: t.nav.home, link: "#home" },
+        { name: t.nav.about, link: "#about" },
+        { name: t.nav.skills, link: "#skills" },
+        { name: t.nav.portfolio, link: "#portfolio" },
+        { name: t.nav.contact, link: "#contact" }
+    ];
+
     return (
         <nav className="navbar">
             <div className="container">
                 <div className="logo">
-                    <a href="#" id="logo-name">{websiteData.basics.name}</a>
+                    <a href="#" onClick={(e) => handleNavLinkClick(e, 'home')}>
+                        <Image
+                            src="/images/logo.png"
+                            alt={websiteData.basics.name}
+                            width={44}
+                            height={44}
+                            className="logo-image"
+                            priority
+                            style={{
+                                width: '44px',
+                                height: '44px',
+                                maxWidth: '44px',
+                                objectFit: 'contain'
+                            }}
+                        />
+                        <span className="logo-text">{websiteData.basics.name}</span>
+                    </a>
                 </div>
                 <div
                     className={`menu-toggle ${isMenuOpen ? 'active' : ''}`}
@@ -58,7 +91,7 @@ export default function Navbar() {
                     <span className="bar"></span>
                 </div>
                 <ul className={`nav-menu ${isMenuOpen ? 'active' : ''}`}>
-                    {websiteData.navigation.map((item, index) => (
+                    {navItems.map((item, index) => (
                         <li key={index}>
                             <a
                                 href={item.link}
@@ -69,6 +102,11 @@ export default function Navbar() {
                             </a>
                         </li>
                     ))}
+                    <li className="appearance-controls">
+                        <ThemeToggle />
+                        <ColorPicker />
+                        <LanguageSwitcher />
+                    </li>
                 </ul>
             </div>
         </nav>

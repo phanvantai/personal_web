@@ -2,6 +2,8 @@
 
 import { useState } from 'react'
 import { websiteData } from '../data/websiteData'
+import { useLanguage } from '../contexts/LanguageContext'
+import { translations } from '../data/translations'
 
 export default function ContactSection() {
     const [formData, setFormData] = useState({
@@ -12,6 +14,8 @@ export default function ContactSection() {
     })
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [submitMessage, setSubmitMessage] = useState('')
+    const { language } = useLanguage();
+    const t = translations[language];
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setFormData({
@@ -25,22 +29,22 @@ export default function ContactSection() {
 
         // Basic validation
         if (!formData.name.trim()) {
-            alert('Please enter your name.')
+            alert(language === 'en' ? 'Please enter your name.' : 'Vui lòng nhập tên của bạn.')
             return
         }
 
         if (!formData.email.trim()) {
-            alert('Please enter your email.')
+            alert(language === 'en' ? 'Please enter your email.' : 'Vui lòng nhập email của bạn.')
             return
         }
 
         if (!isValidEmail(formData.email)) {
-            alert('Please enter a valid email address.')
+            alert(language === 'en' ? 'Please enter a valid email address.' : 'Vui lòng nhập địa chỉ email hợp lệ.')
             return
         }
 
         if (!formData.message.trim()) {
-            alert('Please enter your message.')
+            alert(language === 'en' ? 'Please enter your message.' : 'Vui lòng nhập tin nhắn của bạn.')
             return
         }
 
@@ -49,7 +53,7 @@ export default function ContactSection() {
 
         // Simulate form submission - replace with actual API call
         setTimeout(() => {
-            setSubmitMessage('Message sent successfully!')
+            setSubmitMessage(t.contact.messageSent)
             setFormData({
                 name: '',
                 email: '',
@@ -73,27 +77,33 @@ export default function ContactSection() {
     return (
         <section id="contact" className="contact">
             <div className="container">
-                <h2 className="section-title">Contact Me</h2>
+                <h2 className="section-title">{t.contact.title}</h2>
                 <div className="contact-content">
                     <div className="contact-info">
                         <div className="contact-item">
-                            <i className="fas fa-map-marker-alt"></i>
-                            <div>
-                                <h3>Location</h3>
+                            <div className="contact-icon">
+                                <i className="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div className="contact-details">
+                                <h3>{t.contact.location}</h3>
                                 <p>{websiteData.basics.location}</p>
                             </div>
                         </div>
                         <div className="contact-item">
-                            <i className="fas fa-envelope"></i>
-                            <div>
-                                <h3>Email</h3>
+                            <div className="contact-icon">
+                                <i className="fas fa-envelope"></i>
+                            </div>
+                            <div className="contact-details">
+                                <h3>{t.contact.email}</h3>
                                 <p>{websiteData.basics.email}</p>
                             </div>
                         </div>
                         <div className="contact-item">
-                            <i className="fas fa-phone"></i>
-                            <div>
-                                <h3>Phone</h3>
+                            <div className="contact-icon">
+                                <i className="fas fa-phone"></i>
+                            </div>
+                            <div className="contact-details">
+                                <h3>{t.contact.phone}</h3>
                                 <p>{websiteData.basics.phone}</p>
                             </div>
                         </div>
@@ -104,7 +114,7 @@ export default function ContactSection() {
                                 <input
                                     type="text"
                                     name="name"
-                                    placeholder="Your Name"
+                                    placeholder={t.contact.yourName}
                                     value={formData.name}
                                     onChange={handleChange}
                                     required
@@ -114,7 +124,7 @@ export default function ContactSection() {
                                 <input
                                     type="email"
                                     name="email"
-                                    placeholder="Your Email"
+                                    placeholder={t.contact.yourEmail}
                                     value={formData.email}
                                     onChange={handleChange}
                                     required
@@ -124,7 +134,7 @@ export default function ContactSection() {
                                 <input
                                     type="text"
                                     name="subject"
-                                    placeholder="Subject"
+                                    placeholder={t.contact.subject}
                                     value={formData.subject}
                                     onChange={handleChange}
                                 />
@@ -133,7 +143,7 @@ export default function ContactSection() {
                                 <textarea
                                     name="message"
                                     rows={5}
-                                    placeholder="Your Message"
+                                    placeholder={t.contact.message}
                                     value={formData.message}
                                     onChange={handleChange}
                                     required
@@ -144,7 +154,7 @@ export default function ContactSection() {
                                 className="btn btn-primary"
                                 disabled={isSubmitting}
                             >
-                                {isSubmitting ? 'Sending...' : 'Send Message'}
+                                {isSubmitting ? (language === 'en' ? 'Sending...' : 'Đang gửi...') : t.contact.sendMessage}
                             </button>
 
                             {submitMessage && (

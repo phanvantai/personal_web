@@ -1,12 +1,20 @@
+"use client"
+
 import { websiteData } from '../data/websiteData'
+import { useLanguage } from '../contexts/LanguageContext'
+import { translations } from '../data/translations'
 
 export default function Footer() {
+    const { language } = useLanguage();
+    const t = translations[language];
+    const currentYear = new Date().getFullYear();
+
     return (
         <footer className="footer">
             <div className="container">
                 <div className="footer-content">
                     <div className="copyright">
-                        <p>&copy; {websiteData.copyright}</p>
+                        <p>&copy; {currentYear} {t.footer.copyright}</p>
                     </div>
                     <div className="social-icons">
                         {websiteData.social.map((item, index) => (

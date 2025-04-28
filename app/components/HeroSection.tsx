@@ -2,14 +2,19 @@
 
 import { useEffect, useState } from 'react'
 import { websiteData } from '../data/websiteData'
+import { useLanguage } from '../contexts/LanguageContext'
+import { translations } from '../data/translations'
 
 export default function HeroSection() {
     const [typedText, setTypedText] = useState('')
     const [isDeleting, setIsDeleting] = useState(false)
     const [textArrayIndex, setTextArrayIndex] = useState(0)
     const [typingSpeed, setTypingSpeed] = useState(100)
+    const { language } = useLanguage();
+    const t = translations[language];
 
-    const textArray = websiteData.basics.typingText
+    // Use translated typing text
+    const textArray = t.hero.typingText
 
     useEffect(() => {
         const type = () => {
@@ -49,12 +54,23 @@ export default function HeroSection() {
         <section id="home" className="hero">
             <div className="container">
                 <div className="hero-content">
-                    <h1>Hello, I&apos;m <span className="highlight">{websiteData.basics.name}</span></h1>
-                    <h2>I&apos;m a <span className="typed-text">{typedText}</span><span className="cursor">&nbsp;</span></h2>
-                    <p>{websiteData.basics.description}</p>
+                    <h1>{t.hero.greeting} <span className="highlight">{websiteData.basics.name}</span></h1>
+                    <h2>{t.hero.iam} <span className="typed-text">{typedText}</span><span className="cursor">&nbsp;</span></h2>
+                    <p>{t.hero.description}</p>
                     <div className="hero-buttons">
-                        <a href="#contact" className="btn btn-primary">Contact Me</a>
-                        <a href="#portfolio" className="btn btn-secondary">View My Work</a>
+                        <a href="#contact" className="btn btn-primary" style={{ 
+                            marginRight: '15px',
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            height: '44px'
+                        }}>{t.hero.contactMe}</a>
+                        <a href="#portfolio" className="btn btn-secondary" style={{
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            height: '44px'
+                        }}>{t.hero.viewWork}</a>
                     </div>
                     <div className="social-icons">
                         {renderSocialIcons()}

@@ -1,12 +1,33 @@
 /* Global Styles */
 :root {
+  /* Common variables */
   --primary-color: #6c63ff;
   --secondary-color: #f50057;
-  --dark-color: #333;
-  --light-color: #f4f4f4;
-  --danger-color: #dc3545;
   --success-color: #28a745;
+  --danger-color: #dc3545;
   --max-width: 1200px;
+
+  /* Light theme (default) */
+  --background-color: #fff;
+  --background-alt-color: #f4f4f4;
+  --text-color: #333;
+  --text-muted-color: #555;
+  --card-bg-color: #fff;
+  --border-color: #ddd;
+  --hero-gradient: linear-gradient(135deg, rgba(108, 99, 255, 0.1) 0%, rgba(245, 0, 87, 0.1) 100%);
+  --shadow-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Dark theme */
+[data-theme="dark"] {
+  --background-color: #121212;
+  --background-alt-color: #1e1e1e;
+  --text-color: #e4e4e4;
+  --text-muted-color: #b0b0b0;
+  --card-bg-color: #242424;
+  --border-color: #444;
+  --hero-gradient: linear-gradient(135deg, rgba(108, 99, 255, 0.2) 0%, rgba(245, 0, 87, 0.2) 100%);
+  --shadow-color: rgba(0, 0, 0, 0.5);
 }
 
 * {
@@ -19,8 +40,9 @@ body {
   font-family: 'Poppins', sans-serif;
   font-size: 1rem;
   line-height: 1.6;
-  color: var(--dark-color);
-  background-color: #fff;
+  color: var(--text-color);
+  background-color: var(--background-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 a {
@@ -76,7 +98,7 @@ section {
 }
 
 .btn-secondary:hover {
-  background-color: #f0f0f0;
+  background-color: rgba(108, 99, 255, 0.1);
   transform: translateY(-3px);
 }
 
@@ -85,7 +107,7 @@ section {
   text-align: center;
   margin-bottom: 3rem;
   position: relative;
-  color: var(--dark-color);
+  color: var(--text-color);
 }
 
 .section-title::after {
@@ -103,16 +125,16 @@ section {
   color: var(--primary-color);
 }
 
-/* Add the remaining styles from your existing style.css file here */
 /* Navigation */
 .navbar {
   position: fixed;
   top: 0;
   width: 100%;
-  background-color: #fff;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  background-color: var(--background-color);
+  box-shadow: 0 2px 10px var(--shadow-color);
   padding: 1rem 0;
   z-index: 1000;
+  transition: background-color 0.3s ease;
 }
 
 .navbar .container {
@@ -121,25 +143,51 @@ section {
   align-items: center;
 }
 
+.logo {
+  display: flex;
+  align-items: center;
+}
+
 .logo a {
-  font-size: 1.8rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo-image {
+  border-radius: 4px;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+  width: 44px !important;
+  height: 44px !important;
+}
+
+.logo-text {
+  font-size: 1.4rem;
   font-weight: 700;
-  color: var(--dark-color);
+  color: var(--text-color);
+  transition: color 0.3s ease;
+}
+
+.logo-image:hover {
+  transform: scale(1.05);
 }
 
 .nav-menu {
   display: flex;
+  align-items: center;
 }
 
 .nav-link {
-  color: var(--dark-color);
+  color: var(--text-color);
   padding: 0.5rem 1rem;
   margin: 0 0.25rem;
   font-weight: 500;
   transition: color 0.3s;
 }
 
-.nav-link:hover {
+.nav-link:hover,
+.nav-link.active {
   color: var(--primary-color);
 }
 
@@ -153,8 +201,116 @@ section {
   width: 25px;
   height: 3px;
   margin: 5px auto;
-  background-color: var(--dark-color);
+  background-color: var(--text-color);
   transition: all 0.3s ease-in-out;
+}
+
+/* Theme toggle & Color picker */
+.appearance-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: 10px;
+}
+
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: var(--background-alt-color);
+  cursor: pointer;
+  color: var(--text-color);
+  transition: all 0.3s ease;
+  border: none;
+}
+
+.theme-toggle:hover {
+  background-color: var(--border-color);
+}
+
+/* Color picker styles */
+.color-picker {
+  position: relative;
+}
+
+.color-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  color: white;
+  transition: all 0.3s ease;
+  border: none;
+  padding: 0;
+}
+
+.color-toggle i {
+  font-size: 1rem;
+}
+
+.color-toggle:hover {
+  transform: scale(1.1);
+}
+
+.color-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--card-bg-color);
+  border-radius: 8px;
+  box-shadow: 0 5px 15px var(--shadow-color);
+  display: flex;
+  padding: 8px;
+  gap: 8px;
+  z-index: 1001;
+}
+
+.color-option {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all 0.2s ease;
+  padding: 0;
+}
+
+.color-option.active {
+  border-color: var(--text-color);
+  transform: scale(1.2);
+}
+
+.color-option:hover:not(.active) {
+  transform: scale(1.1);
+}
+
+/* Language switcher styles */
+.language-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: var(--background-alt-color);
+  cursor: pointer;
+  color: var(--text-color);
+  transition: all 0.3s ease;
+  border: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.language-toggle:hover {
+  background-color: var(--primary-color);
+  color: white;
 }
 
 /* Hero Section */
@@ -163,7 +319,7 @@ section {
   display: flex;
   align-items: center;
   padding-top: 80px;
-  background: linear-gradient(135deg, rgba(108, 99, 255, 0.1) 0%, rgba(245, 0, 87, 0.1) 100%);
+  background: var(--hero-gradient);
 }
 
 .hero-content {
@@ -176,18 +332,20 @@ section {
   font-size: 3.5rem;
   margin-bottom: 1rem;
   animation: fadeIn 1s ease-in-out;
+  color: var(--text-color);
 }
 
 .hero h2 {
   font-size: 2rem;
   margin-bottom: 1.5rem;
   font-weight: 500;
+  color: var(--text-color);
 }
 
 .hero p {
   font-size: 1.2rem;
   margin-bottom: 2rem;
-  color: #555;
+  color: var(--text-muted-color);
 }
 
 .hero-buttons {
@@ -202,17 +360,17 @@ section {
 .cursor {
   display: inline-block;
   width: 3px;
-  background-color: #333;
+  background-color: var(--text-color);
   animation: blink 0.7s infinite;
 }
 
 @keyframes blink {
   0% {
-    background-color: #333;
+    background-color: var(--text-color);
   }
 
   49% {
-    background-color: #333;
+    background-color: var(--text-color);
   }
 
   50% {
@@ -224,7 +382,7 @@ section {
   }
 
   100% {
-    background-color: #333;
+    background-color: var(--text-color);
   }
 }
 
@@ -241,7 +399,7 @@ section {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background-color: var(--light-color);
+  background-color: var(--background-alt-color);
   color: var(--primary-color);
   margin: 0 0.5rem;
   transition: all 0.3s ease;
@@ -277,7 +435,7 @@ section {
 
 .about-image img {
   border-radius: 10px;
-  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 15px var(--shadow-color);
 }
 
 .about-text h3 {
@@ -288,7 +446,7 @@ section {
 
 .about-text p {
   margin-bottom: 1.5rem;
-  color: #555;
+  color: var(--text-muted-color);
 }
 
 .personal-info {
@@ -306,16 +464,16 @@ section {
 .info-title {
   min-width: 120px;
   font-weight: 600;
-  color: var(--dark-color);
+  color: var(--text-color);
 }
 
 .info-value {
-  color: #555;
+  color: var(--text-muted-color);
 }
 
 /* Skills Section */
 .skills {
-  background-color: var(--light-color);
+  background-color: var(--background-alt-color);
 }
 
 .skills-content {
@@ -337,11 +495,12 @@ section {
 .skill-name {
   margin-bottom: 0.5rem;
   font-weight: 500;
+  color: var(--text-color);
 }
 
 .skill-bar {
   height: 10px;
-  background-color: #ddd;
+  background-color: var(--border-color);
   border-radius: 10px;
   overflow: hidden;
 }
@@ -371,7 +530,8 @@ section {
   margin: 0 0.5rem 0.5rem 0;
   border: none;
   border-radius: 30px;
-  background-color: var(--light-color);
+  background-color: var(--background-alt-color);
+  color: var(--text-color);
   cursor: pointer;
   font-weight: 500;
   transition: all 0.3s ease;
@@ -393,8 +553,9 @@ section {
   border-radius: 10px;
   overflow: hidden;
   position: relative;
-  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 15px var(--shadow-color);
   transition: all 0.3s ease;
+  background-color: var(--card-bg-color);
 }
 
 .portfolio-item:hover {
@@ -419,16 +580,17 @@ section {
 .portfolio-info {
   padding: 1.5rem;
   position: relative;
-  background-color: white;
+  background-color: var(--card-bg-color);
 }
 
 .portfolio-info h3 {
   font-size: 1.2rem;
   margin-bottom: 0.5rem;
+  color: var(--text-color);
 }
 
 .portfolio-info p {
-  color: #777;
+  color: var(--text-muted-color);
   font-size: 0.9rem;
 }
 
@@ -470,20 +632,31 @@ section {
   align-items: flex-start;
 }
 
-.contact-item i {
+.contact-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: rgba(108, 99, 255, 0.1);
+  margin-right: 1.5rem;
+  flex-shrink: 0;
+}
+
+.contact-icon i {
   font-size: 1.5rem;
   color: var(--primary-color);
-  margin-right: 1.5rem;
-  margin-top: 5px;
 }
 
-.contact-item h3 {
+.contact-details h3 {
   font-size: 1.2rem;
   margin-bottom: 0.5rem;
+  color: var(--text-color);
 }
 
-.contact-item p {
-  color: #555;
+.contact-details p {
+  color: var(--text-muted-color);
 }
 
 .form-group {
@@ -495,11 +668,13 @@ section {
   width: 100%;
   padding: 1rem;
   font-size: 1rem;
-  border: 1px solid #ddd;
+  border: 1px solid var(--border-color);
   border-radius: 5px;
   outline: none;
   font-family: 'Poppins', sans-serif;
   transition: border-color 0.3s;
+  background-color: var(--background-color);
+  color: var(--text-color);
 }
 
 .form-group input:focus,
@@ -509,8 +684,8 @@ section {
 
 /* Footer */
 .footer {
-  background-color: var(--dark-color);
-  color: white;
+  background-color: var(--background-alt-color);
+  color: var(--text-color);
   padding: 2rem 0;
 }
 
@@ -521,12 +696,13 @@ section {
 }
 
 .footer .social-icons a {
-  background-color: #444;
-  color: white;
+  background-color: var(--card-bg-color);
+  color: var(--primary-color);
 }
 
 .footer .social-icons a:hover {
   background-color: var(--primary-color);
+  color: white;
 }
 
 /* Back to top button */
@@ -597,10 +773,10 @@ section {
     left: -100%;
     top: 70px;
     flex-direction: column;
-    background-color: white;
+    background-color: var(--background-color);
     width: 100%;
     text-align: center;
-    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 15px var(--shadow-color);
     transition: 0.3s;
   }
 
