@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
-import { websiteData } from '../data/websiteData'
 import ThemeToggle from './ThemeToggle'
 import ColorPicker from './ColorPicker'
 import LanguageSwitcher from './LanguageSwitcher'
@@ -67,7 +66,7 @@ export default function Navbar() {
                     <a href="#" onClick={(e) => handleNavLinkClick(e, 'home')}>
                         <Image
                             src="/images/logo.png"
-                            alt={websiteData.basics.name}
+                            alt={t.basics.name}
                             width={44}
                             height={44}
                             className="logo-image"
@@ -79,7 +78,7 @@ export default function Navbar() {
                                 objectFit: 'contain'
                             }}
                         />
-                        <span className="logo-text">{websiteData.basics.name}</span>
+                        <span className="logo-text">{t.basics.name}</span>
                     </a>
                 </div>
                 <div

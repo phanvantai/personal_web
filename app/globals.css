@@ -581,6 +581,8 @@ section {
   padding: 1.5rem;
   position: relative;
   background-color: var(--card-bg-color);
+  padding-right: 5.5rem;
+  /* Add extra padding on the right to make room for buttons */
 }
 
 .portfolio-info h3 {
@@ -598,7 +600,6 @@ section {
 .portfolio-details {
   position: absolute;
   right: 1.5rem;
-  top: 1.5rem;
   width: 35px;
   height: 35px;
   background-color: var(--primary-color);
@@ -610,8 +611,13 @@ section {
   transition: all 0.3s ease;
 }
 
+.portfolio-link {
+  top: 1.5rem;
+}
+
 .portfolio-details {
-  right: 4rem;
+  top: 5rem;
+  /* Position the second button below the first one */
 }
 
 .portfolio-link:hover,

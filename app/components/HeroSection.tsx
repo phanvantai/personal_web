@@ -1,7 +1,6 @@
 "use client"
 
 import { useEffect, useState } from 'react'
-import { websiteData } from '../data/websiteData'
 import { useLanguage } from '../contexts/LanguageContext'
 import { translations } from '../data/translations'
 
@@ -43,7 +42,7 @@ export default function HeroSection() {
     }, [typedText, isDeleting, textArrayIndex, typingSpeed, textArray])
 
     const renderSocialIcons = () => {
-        return websiteData.social.map((item, index) => (
+        return t.social.map((item, index) => (
             <a key={index} href={item.url} target="_blank" rel="noopener noreferrer">
                 <i className={item.icon}></i>
             </a>
@@ -54,11 +53,11 @@ export default function HeroSection() {
         <section id="home" className="hero">
             <div className="container">
                 <div className="hero-content">
-                    <h1>{t.hero.greeting} <span className="highlight">{websiteData.basics.name}</span></h1>
+                    <h1>{t.hero.greeting} <span className="highlight">{t.basics.name}</span></h1>
                     <h2>{t.hero.iam} <span className="typed-text">{typedText}</span><span className="cursor">&nbsp;</span></h2>
                     <p>{t.hero.description}</p>
                     <div className="hero-buttons">
-                        <a href="#contact" className="btn btn-primary" style={{ 
+                        <a href="#contact" className="btn btn-primary" style={{
                             marginRight: '15px',
                             display: 'inline-flex',
                             alignItems: 'center',

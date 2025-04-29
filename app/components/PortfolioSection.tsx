@@ -2,7 +2,6 @@
 
 import { useState } from 'react'
 import Image from 'next/image'
-import { websiteData } from '../data/websiteData'
 import { useLanguage } from '../contexts/LanguageContext'
 import { translations } from '../data/translations'
 
@@ -23,9 +22,20 @@ export default function PortfolioSection() {
         t.portfolio.categories.other
     ];
 
-    const filteredProjects = websiteData.portfolio.projects.filter(project =>
-        activeFilter === t.portfolio.categories.all || project.category === activeFilter
-    )
+    // Map translated category back to English key for filtering
+    const getCategoryKey = (translatedCategory: string): string => {
+        const categoryMap = {
+            [t.portfolio.categories.all]: 'all',
+            [t.portfolio.categories.ios]: 'ios',
+            [t.portfolio.categories.flutter]: 'flutter',
+            [t.portfolio.categories.other]: 'other'
+        };
+        return categoryMap[translatedCategory] || translatedCategory;
+    };
+
+    const filteredProjects = t.portfolio.projectsData.filter(project =>
+        getCategoryKey(activeFilter) === 'all' || project.category === getCategoryKey(activeFilter)
+    );
 
     return (
         <section id="portfolio" className="portfolio">
@@ -45,13 +55,13 @@ export default function PortfolioSection() {
                 </div>
 
                 <div className="portfolio-grid">
-                    {filteredProjects.map((project, index) => {
-                        // Get translated project info
-                        const translatedProject = t.portfolio.projects[project.name];
+                    {filteredProjects.map((project) => {
+                        // Get translated project info using project ID instead of name
+                        const translatedProject = t.portfolio.projects[project.id];
 
                         return (
                             <div
-                                key={index}
+                                key={project.id}
                                 className="portfolio-item"
                                 style={{
                                     opacity: 1,

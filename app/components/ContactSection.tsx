@@ -2,7 +2,6 @@
 
 import { useState } from 'react'
 import { useForm, ValidationError } from '@formspree/react'
-import { websiteData } from '../data/websiteData'
 import { useLanguage } from '../contexts/LanguageContext'
 import { translations } from '../data/translations'
 
@@ -82,7 +81,7 @@ export default function ContactSection() {
                             </div>
                             <div className="contact-details">
                                 <h3>{t.contact.location}</h3>
-                                <p>{websiteData.basics.location}</p>
+                                <p>{t.basics.location}</p>
                             </div>
                         </div>
                         <div className="contact-item">
@@ -91,7 +90,7 @@ export default function ContactSection() {
                             </div>
                             <div className="contact-details">
                                 <h3>{t.contact.email}</h3>
-                                <p>{websiteData.basics.email}</p>
+                                <p>{t.basics.email}</p>
                             </div>
                         </div>
                         <div className="contact-item">
@@ -100,7 +99,7 @@ export default function ContactSection() {
                             </div>
                             <div className="contact-details">
                                 <h3>{t.contact.phone}</h3>
-                                <p>{websiteData.basics.phone}</p>
+                                <p>{t.basics.phone}</p>
                             </div>
                         </div>
                     </div>

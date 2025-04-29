@@ -1,6 +1,5 @@
 "use client"
 
-import { websiteData } from '../data/websiteData'
 import { useLanguage } from '../contexts/LanguageContext'
 import { translations } from '../data/translations'
 
@@ -17,7 +16,7 @@ export default function Footer() {
                         <p>&copy; {currentYear} {t.footer.copyright}</p>
                     </div>
                     <div className="social-icons">
-                        {websiteData.social.map((item, index) => (
+                        {t.social.map((item, index) => (
                             <a key={index} href={item.url} target="_blank" rel="noopener noreferrer">
                                 <i className={item.icon}></i>
                             </a>

@@ -1,5 +1,25 @@
 import { Language } from '../contexts/LanguageContext';
 
+type SkillItem = {
+    name: string;
+    level: number;
+};
+
+type ProjectItem = {
+    id: string;
+    name: string;
+    category: string;
+    image: string;
+    link: string;
+    detailsLink: string;
+};
+
+type SocialItem = {
+    platform: string;
+    icon: string;
+    url: string;
+};
+
 type TranslationDictionary = {
     [key in Language]: {
         // Navigation
@@ -35,6 +55,8 @@ type TranslationDictionary = {
             title: string;
             technical: string;
             professional: string;
+            technicalSkills: SkillItem[];
+            professionalSkills: SkillItem[];
         };
         // Portfolio section
         portfolio: {
@@ -51,6 +73,7 @@ type TranslationDictionary = {
                     description: string;
                 };
             };
+            projectsData: ProjectItem[];
         };
         // Contact section
         contact: {
@@ -70,6 +93,17 @@ type TranslationDictionary = {
         footer: {
             copyright: string;
         };
+        // Basic information
+        basics: {
+            name: string;
+            title: string;
+            location: string;
+            email: string;
+            phone: string;
+            available: string;
+        };
+        // Social media
+        social: SocialItem[];
     };
 };
 
@@ -107,6 +141,22 @@ export const translations: TranslationDictionary = {
             title: 'My Skills',
             technical: 'Technical Skills',
             professional: 'Professional Skills',
+            technicalSkills: [
+                { name: "iOS (Swift/SwiftUI)", level: 95 },
+                { name: "Flutter/Dart", level: 90 },
+                { name: "React Native", level: 75 },
+                { name: "Firebase", level: 85 },
+                { name: "RESTful APIs", level: 92 },
+                { name: "GraphQL", level: 80 },
+                { name: "Git/Version Control", level: 90 }
+            ],
+            professionalSkills: [
+                { name: "UI/UX Implementation", level: 88 },
+                { name: "Problem Solving", level: 90 },
+                { name: "Team Collaboration", level: 88 },
+                { name: "Agile/Scrum", level: 85 },
+                { name: "Code Review", level: 88 }
+            ]
         },
         portfolio: {
             title: 'My Portfolio',
@@ -117,31 +167,81 @@ export const translations: TranslationDictionary = {
                 other: 'other',
             },
             projects: {
-                'Health Tracker Pro': {
+                'health-tracker': {
                     name: 'Health Tracker Pro',
                     description: 'iOS health monitoring app with Apple Health integration',
                 },
-                'E-commerce Solution': {
+                'ecommerce': {
                     name: 'E-commerce Solution',
                     description: 'Cross-platform shopping app built with Flutter',
                 },
-                'Smart Home Control': {
+                'smart-home': {
                     name: 'Smart Home Control',
                     description: 'IoT control app for smart home devices',
                 },
-                'Travel Companion': {
+                'travel': {
                     name: 'Travel Companion',
                     description: 'Travel planning and booking app with offline capabilities',
                 },
-                'Fitness Coach': {
+                'fitness': {
                     name: 'Fitness Coach',
                     description: 'Workout tracking with ML-based form correction',
                 },
-                'Fintech Dashboard': {
+                'fintech': {
                     name: 'Fintech Dashboard',
                     description: 'Financial analytics mobile dashboard with charts and insights',
                 },
             },
+            projectsData: [
+                {
+                    id: "health-tracker",
+                    name: "Health Tracker Pro",
+                    category: "ios",
+                    image: "portfolio1.jpg",
+                    link: "#",
+                    detailsLink: "#"
+                },
+                {
+                    id: "ecommerce",
+                    name: "E-commerce Solution",
+                    category: "flutter",
+                    image: "portfolio2.jpg",
+                    link: "#",
+                    detailsLink: "#"
+                },
+                {
+                    id: "smart-home",
+                    name: "Smart Home Control",
+                    category: "ios",
+                    image: "portfolio3.jpg",
+                    link: "#",
+                    detailsLink: "#"
+                },
+                {
+                    id: "travel",
+                    name: "Travel Companion",
+                    category: "flutter",
+                    image: "portfolio4.jpg",
+                    link: "#",
+                    detailsLink: "#"
+                },
+                {
+                    id: "fitness",
+                    name: "Fitness Coach",
+                    category: "ios",
+                    image: "portfolio5.jpg",
+                    link: "#",
+                    detailsLink: "#"
+                },
+                {
+                    id: "fintech",
+                    name: "Fintech Dashboard",
+                    category: "other",
+                    image: "portfolio6.jpg",
+                    link: "#",
+                    detailsLink: "#"
+                }
+            ]
         },
         contact: {
             title: 'Get in Touch',
@@ -159,6 +259,19 @@ export const translations: TranslationDictionary = {
         footer: {
             copyright: 'Tai Phan Van. All Rights Reserved.',
         },
+        basics: {
+            name: "Tai Phan Van",
+            title: "Mobile Engineer",
+            location: "Hanoi, Vietnam",
+            email: "taipv.swe@gmail.com",
+            phone: "+84988247064",
+            available: "Freelance, Full-time"
+        },
+        social: [
+            { platform: "linkedin", icon: "fab fa-linkedin", url: "https://www.linkedin.com/in/tai-phan-van/" },
+            { platform: "github", icon: "fab fa-github", url: "https://github.com/phanvantai" },
+            { platform: "email", icon: "fas fa-envelope", url: "mailto:taipv.swe@gmail.com" }
+        ]
     },
     vi: {
         nav: {
@@ -193,6 +306,22 @@ export const translations: TranslationDictionary = {
             title: 'Kỹ năng của tôi',
             technical: 'Kỹ năng chuyên môn',
             professional: 'Kỹ năng chuyên nghiệp',
+            technicalSkills: [
+                { name: "iOS (Swift/SwiftUI)", level: 95 },
+                { name: "Flutter/Dart", level: 90 },
+                { name: "React Native", level: 75 },
+                { name: "Firebase", level: 85 },
+                { name: "RESTful APIs", level: 92 },
+                { name: "GraphQL", level: 80 },
+                { name: "Git/Kiểm soát phiên bản", level: 90 }
+            ],
+            professionalSkills: [
+                { name: "Triển khai UI/UX", level: 88 },
+                { name: "Giải quyết vấn đề", level: 90 },
+                { name: "Hợp tác nhóm", level: 88 },
+                { name: "Agile/Scrum", level: 85 },
+                { name: "Đánh giá mã nguồn", level: 88 }
+            ]
         },
         portfolio: {
             title: 'Dự án của tôi',
@@ -203,31 +332,81 @@ export const translations: TranslationDictionary = {
                 other: 'khác',
             },
             projects: {
-                'Health Tracker Pro': {
+                'health-tracker': {
                     name: 'Theo dõi sức khỏe Pro',
                     description: 'Ứng dụng theo dõi sức khỏe iOS tích hợp với Apple Health',
                 },
-                'E-commerce Solution': {
+                'ecommerce': {
                     name: 'Giải pháp thương mại điện tử',
                     description: 'Ứng dụng mua sắm đa nền tảng được xây dựng bằng Flutter',
                 },
-                'Smart Home Control': {
+                'smart-home': {
                     name: 'Điều khiển nhà thông minh',
                     description: 'Ứng dụng điều khiển IoT cho thiết bị nhà thông minh',
                 },
-                'Travel Companion': {
+                'travel': {
                     name: 'Trợ lý du lịch',
                     description: 'Ứng dụng lập kế hoạch và đặt chỗ du lịch với khả năng làm việc ngoại tuyến',
                 },
-                'Fitness Coach': {
+                'fitness': {
                     name: 'HLV thể hình',
                     description: 'Theo dõi tập luyện với tính năng sửa tư thế dựa trên ML',
                 },
-                'Fintech Dashboard': {
+                'fintech': {
                     name: 'Bảng điều khiển Fintech',
                     description: 'Bảng điều khiển phân tích tài chính trên di động với biểu đồ và thông tin chi tiết',
                 },
             },
+            projectsData: [
+                {
+                    id: "health-tracker",
+                    name: "Health Tracker Pro",
+                    category: "ios",
+                    image: "portfolio1.jpg",
+                    link: "#",
+                    detailsLink: "#"
+                },
+                {
+                    id: "ecommerce",
+                    name: "E-commerce Solution",
+                    category: "flutter",
+                    image: "portfolio2.jpg",
+                    link: "#",
+                    detailsLink: "#"
+                },
+                {
+                    id: "smart-home",
+                    name: "Smart Home Control",
+                    category: "ios",
+                    image: "portfolio3.jpg",
+                    link: "#",
+                    detailsLink: "#"
+                },
+                {
+                    id: "travel",
+                    name: "Travel Companion",
+                    category: "flutter",
+                    image: "portfolio4.jpg",
+                    link: "#",
+                    detailsLink: "#"
+                },
+                {
+                    id: "fitness",
+                    name: "Fitness Coach",
+                    category: "ios",
+                    image: "portfolio5.jpg",
+                    link: "#",
+                    detailsLink: "#"
+                },
+                {
+                    id: "fintech",
+                    name: "Fintech Dashboard",
+                    category: "other",
+                    image: "portfolio6.jpg",
+                    link: "#",
+                    detailsLink: "#"
+                }
+            ]
         },
         contact: {
             title: 'Liên hệ',
@@ -245,5 +424,18 @@ export const translations: TranslationDictionary = {
         footer: {
             copyright: 'Phan Văn Tài. Đã đăng ký bản quyền.',
         },
+        basics: {
+            name: "Phan Văn Tài",
+            title: "Kỹ sư Mobile",
+            location: "Hà Nội, Việt Nam",
+            email: "taipv.swe@gmail.com",
+            phone: "+84988247064",
+            available: "Freelance, Toàn thời gian"
+        },
+        social: [
+            { platform: "linkedin", icon: "fab fa-linkedin", url: "https://www.linkedin.com/in/tai-phan-van/" },
+            { platform: "github", icon: "fab fa-github", url: "https://github.com/phanvantai" },
+            { platform: "email", icon: "fas fa-envelope", url: "mailto:taipv.swe@gmail.com" }
+        ]
     },
 };

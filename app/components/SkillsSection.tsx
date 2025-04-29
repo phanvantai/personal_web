@@ -1,7 +1,6 @@
 "use client"
 
 import { useEffect, useRef } from 'react'
-import { websiteData } from '../data/websiteData'
 import { useLanguage } from '../contexts/LanguageContext'
 import { translations } from '../data/translations'
 
@@ -47,13 +46,16 @@ export default function SkillsSection() {
             })
         }, { threshold: 0.1 })
 
-        if (skillsRef.current) {
-            observer.observe(skillsRef.current)
+        // Store the current value of the ref in a variable
+        const currentSkillsRef = skillsRef.current;
+
+        if (currentSkillsRef) {
+            observer.observe(currentSkillsRef)
         }
 
         return () => {
-            if (skillsRef.current) {
-                observer.unobserve(skillsRef.current)
+            if (currentSkillsRef) {
+                observer.unobserve(currentSkillsRef)
             }
         }
     }, [])
@@ -65,13 +67,13 @@ export default function SkillsSection() {
                 <div className="skills-content">
                     <div className="skill-category">
                         <h3>{t.skills.technical}</h3>
-                        {websiteData.skills.technical.map((skill, index) => (
+                        {t.skills.technicalSkills.map((skill, index) => (
                             <SkillItem key={index} name={skill.name} level={skill.level} />
                         ))}
                     </div>
                     <div className="skill-category">
                         <h3>{t.skills.professional}</h3>
-                        {websiteData.skills.professional.map((skill, index) => (
+                        {t.skills.professionalSkills.map((skill, index) => (
                             <SkillItem key={index} name={skill.name} level={skill.level} />
                         ))}
                     </div>

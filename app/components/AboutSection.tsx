@@ -1,7 +1,6 @@
 "use client"
 
 import Image from 'next/image'
-import { websiteData } from '../data/websiteData'
 import { useLanguage } from '../contexts/LanguageContext'
 import { translations } from '../data/translations'
 
@@ -36,19 +35,19 @@ export default function AboutSection() {
                         <div className="personal-info">
                             <div className="info-item">
                                 <span className="info-title">{t.about.name}</span>
-                                <span className="info-value">{websiteData.basics.name}</span>
+                                <span className="info-value">{t.basics.name}</span>
                             </div>
                             <div className="info-item">
                                 <span className="info-title">{t.about.email}</span>
-                                <span className="info-value">{websiteData.basics.email}</span>
+                                <span className="info-value">{t.basics.email}</span>
                             </div>
                             <div className="info-item">
                                 <span className="info-title">{t.about.location}</span>
-                                <span className="info-value">{websiteData.basics.location}</span>
+                                <span className="info-value">{t.basics.location}</span>
                             </div>
                             <div className="info-item">
                                 <span className="info-title">{t.about.availableFor}</span>
-                                <span className="info-value">{websiteData.basics.available}</span>
+                                <span className="info-value">{t.basics.available}</span>
                             </div>
                         </div>
                         <a href="#" className="btn btn-primary">{t.about.downloadCV}</a>
