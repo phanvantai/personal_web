@@ -74,7 +74,7 @@ export default function PortfolioSection() {
                                 </div>
                                 <div className="portfolio-info">
                                     <h3>{translatedProject?.name || project.name}</h3>
-                                    <p>{translatedProject?.description || project.description}</p>
+                                    <p>{translatedProject?.description || ''}</p>
                                     <a href={project.link} className="portfolio-link">
                                         <i className="fas fa-link"></i>
                                     </a>
