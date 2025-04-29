@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from 'react'
+import { useForm, ValidationError } from '@formspree/react'
 import { websiteData } from '../data/websiteData'
 import { useLanguage } from '../contexts/LanguageContext'
 import { translations } from '../data/translations'
@@ -12,10 +13,10 @@ export default function ContactSection() {
         subject: '',
         message: ''
     })
-    const [isSubmitting, setIsSubmitting] = useState(false)
-    const [submitMessage, setSubmitMessage] = useState('')
     const { language } = useLanguage();
     const t = translations[language];
+
+    const [state, handleFormspreeSubmit] = useForm("xblrvenp");
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setFormData({
@@ -48,30 +49,25 @@ export default function ContactSection() {
             return
         }
 
-        // Form submission
-        setIsSubmitting(true)
+        // Submit form through Formspree
+        handleFormspreeSubmit(e);
+    }
 
-        // Simulate form submission - replace with actual API call
+    const isValidEmail = (email: string) => {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+        return emailRegex.test(email)
+    }
+
+    // Reset form after successful submission
+    if (state.succeeded) {
         setTimeout(() => {
-            setSubmitMessage(t.contact.messageSent)
             setFormData({
                 name: '',
                 email: '',
                 subject: '',
                 message: ''
             })
-            setIsSubmitting(false)
-
-            // Clear success message after 3 seconds
-            setTimeout(() => {
-                setSubmitMessage('')
-            }, 3000)
-        }, 1500)
-    }
-
-    const isValidEmail = (email: string) => {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-        return emailRegex.test(email)
+        }, 3000)
     }
 
     return (
@@ -119,6 +115,7 @@ export default function ContactSection() {
                                     onChange={handleChange}
                                     required
                                 />
+                                <ValidationError prefix="Name" field="name" errors={state.errors} />
                             </div>
                             <div className="form-group">
                                 <input
@@ -129,6 +126,7 @@ export default function ContactSection() {
                                     onChange={handleChange}
                                     required
                                 />
+                                <ValidationError prefix="Email" field="email" errors={state.errors} />
                             </div>
                             <div className="form-group">
                                 <input
@@ -138,6 +136,7 @@ export default function ContactSection() {
                                     value={formData.subject}
                                     onChange={handleChange}
                                 />
+                                <ValidationError prefix="Subject" field="subject" errors={state.errors} />
                             </div>
                             <div className="form-group">
                                 <textarea
@@ -148,18 +147,19 @@ export default function ContactSection() {
                                     onChange={handleChange}
                                     required
                                 />
+                                <ValidationError prefix="Message" field="message" errors={state.errors} />
                             </div>
                             <button
                                 type="submit"
                                 className="btn btn-primary"
-                                disabled={isSubmitting}
+                                disabled={state.submitting}
                             >
-                                {isSubmitting ? (language === 'en' ? 'Sending...' : 'Đang gửi...') : t.contact.sendMessage}
+                                {state.submitting ? (language === 'en' ? 'Sending...' : 'Đang gửi...') : t.contact.sendMessage}
                             </button>
 
-                            {submitMessage && (
+                            {state.succeeded && (
                                 <div className="form-message" style={{ color: 'green', marginTop: '1rem' }}>
-                                    {submitMessage}
+                                    {t.contact.messageSent}
                                 </div>
                             )}
                         </form>
