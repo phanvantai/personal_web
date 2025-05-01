@@ -11,13 +11,18 @@ A modern personal portfolio website built with [Next.js](https://nextjs.org) to 
 - Smooth scrolling and animations
 - Back to top functionality
 - SEO optimized
+- Multi-language support (English and others)
+- Dark/Light theme toggle
+- Custom color themes
 
 ## Technologies Used
 
 - **Framework**: [Next.js](https://nextjs.org)
-- **Styling**: CSS with modern features
-- **Fonts**: [Geist](https://vercel.com/font) by Vercel
-- **Deployment**: Vercel
+- **Language**: TypeScript
+- **Styling**: CSS with custom variables for theming
+- **Fonts**: Poppins from Google Fonts
+- **Form Handling**: Formspree
+- **Deployment**: GitHub Actions with GitHub Pages
 
 ## Getting Started
 
@@ -47,9 +52,16 @@ app/
 │   ├── HeroSection.tsx
 │   ├── Navbar.tsx
 │   ├── PortfolioSection.tsx
-│   └── SkillsSection.tsx
+│   ├── SkillsSection.tsx
+│   ├── ThemeToggle.tsx
+│   ├── ColorPicker.tsx
+│   ├── LanguageSwitcher.tsx
+│   └── LanguageAwareHtml.tsx
+├── contexts/
+│   ├── ThemeContext.tsx  # Dark/Light mode management
+│   └── LanguageContext.tsx  # Multi-language support
 ├── data/
-│   └── websiteData.ts # Website content and configuration
+│   └── translations.ts # Website content and translations
 ├── globals.css        # Global styles
 ├── layout.tsx         # Root layout
 └── page.tsx           # Main page component
@@ -57,7 +69,22 @@ app/
 
 ## Customization
 
-You can modify the content and styling of the website by updating the data in `app/data/websiteData.ts`.
+You can modify the content and styling of the website by updating the translations in `app/data/translations.ts`.
+
+## Deployment
+
+This website is deployed using GitHub Actions with GitHub Pages. The workflow automatically builds and deploys the website whenever changes are pushed to the main branch.
+
+### GitHub Actions Workflow
+
+The deployment is handled by a GitHub Actions workflow defined in `.github/workflows/deploy.yml`. The workflow:
+
+1. Builds the Next.js application using Node.js 20
+2. Exports static files to the `out` directory
+3. Copies the CNAME file to preserve custom domain settings
+4. Uploads and deploys to GitHub Pages
+
+To view the complete workflow configuration, check the [deploy.yml](https://github.com/phanvantai/personal_web/blob/main/.github/workflows/deploy.yml) file.
 
 ## Learn More
 
@@ -66,12 +93,6 @@ To learn more about Next.js, take a look at the following resources:
 - [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
 - [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme).
-
-Check out the [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-
 ## Contact
 
-Feel free to reach out to me at [taipv.swe@gmail.com](mailto:taipv.swe@gmail.com) or connect on [LinkedIn](https://www.linkedin.com/in/taiphanvan/).
+Feel free to reach out to me at [taipv.swe@gmail.com](mailto:taipv.swe@gmail.com) or connect on [LinkedIn](https://www.linkedin.com/in/tai-phan-van/).
